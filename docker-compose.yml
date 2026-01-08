@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: linker_app
+    ports:
+      - 8000:8000
+    networks:
+      - linker_backend
+    restart: unless-stopped
+
+networks:
+  linker_backend:
+    external: true
