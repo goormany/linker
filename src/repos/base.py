@@ -9,7 +9,6 @@ from src.repos.mappers.base import BaseMapper
 from src.utils.exceptions import NotUniqueException, ObjNotFoundException
 
 
-
 class BaseRepository:
     model: Base = None
     mapper: BaseMapper = None
