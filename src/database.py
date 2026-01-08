@@ -12,5 +12,6 @@ session_maker_null_pool = async_sessionmaker(
     bind=engine_null_pull, expire_on_commit=False
 )
 
+
 class Base(DeclarativeBase):
     pass

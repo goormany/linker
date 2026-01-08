@@ -5,7 +5,10 @@ from src.schemas.links import CreateLinksResponce, LinksAddRequest
 from src.services.links import LinksServices
 from src.api.dependencies import DBDep
 from src.utils.exceptions import NotUniqueLinkException, LinkNotFoundException
-from src.utils.http_exceptions import NotUniqueLinkHTTPException, LinkNotFoundHTTPException
+from src.utils.http_exceptions import (
+    NotUniqueLinkHTTPException,
+    LinkNotFoundHTTPException,
+)
 
 router = APIRouter(tags=["Links"])
 
@@ -18,6 +21,7 @@ async def create_short_link(db: DBDep, dest_url_data: LinksAddRequest = Body()):
         raise NotUniqueLinkHTTPException
     return {"ok": True, "data": data}
 
+
 @router.get("/{slug}", status_code=302)
 async def get_dest_url(db: DBDep, slug: str = Path()):
     try:
@@ -26,7 +30,4 @@ async def get_dest_url(db: DBDep, slug: str = Path()):
     except LinkNotFoundException:
         raise LinkNotFoundHTTPException
     print(data.dest_url)
-    return RedirectResponse(
-        url=data.dest_url,
-        status_code=status.HTTP_302_FOUND
-    )
+    return RedirectResponse(url=data.dest_url, status_code=status.HTTP_302_FOUND)

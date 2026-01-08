@@ -1,7 +1,12 @@
 from src.schemas.links import LinksAddRequest, LinksAdd
 from src.services.base import BaseService
 from src.utils.gen_slug import get_slug
-from src.utils.exceptions import NotUniqueException, NotUniqueLinkException, ObjNotFoundException, LinkNotFoundException
+from src.utils.exceptions import (
+    NotUniqueException,
+    NotUniqueLinkException,
+    ObjNotFoundException,
+    LinkNotFoundException,
+)
 
 
 class LinksServices(BaseService):
@@ -13,7 +18,7 @@ class LinksServices(BaseService):
         except NotUniqueException as e:
             raise NotUniqueLinkException from e
         return data
-    
+
     async def get_dest_url(self, slug: str):
         try:
             return await self.db.links.get_one(slug=slug)
