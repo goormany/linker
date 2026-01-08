@@ -12,16 +12,12 @@ from src.utils.exceptions import NotUniqueException, ObjNotFoundException
 class BaseRepository:
     model: Base = None
     mapper: BaseMapper = None
-    
+
     def __init__(self, session: AsyncSession):
         self.session = session
-    
+
     async def get_one(self, *args, **kwargs):
-        query = (
-            select(self.model)
-            .filter(*args)
-            .filter_by(**kwargs)
-        )
+        query = select(self.model).filter(*args).filter_by(**kwargs)
         res = await self.session.execute(query)
         try:
             res = res.scalar_one()
@@ -29,10 +25,10 @@ class BaseRepository:
             raise ObjNotFoundException from e
 
         return self.mapper.map_to_schema(res)
-    
+
     async def get_all(self):
         return await self.get_filtred()
-    
+
     async def add(self, data: BaseModel, exclude_unset: bool = False):
         add_stmt = (
             insert(self.model)

@@ -13,15 +13,18 @@ from src.utils.db_manager import DBManager
 async def check_mode():
     assert settings.MODE == "TEST"
 
+
 @pytest.fixture(scope="session", autouse=True)
 async def setup_db(check_mode):
     async with engine_null_pull.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
 
+
 async def get_db_null_pull():
     async with DBManager(session_maker_null_pool) as db:
         yield db
+
 
 @pytest.fixture(scope="function")
 async def db() -> AsyncGenerator[DBManager, None]:
@@ -30,6 +33,7 @@ async def db() -> AsyncGenerator[DBManager, None]:
 
 
 app.dependency_overrides[get_db] = get_db_null_pull
+
 
 @pytest.fixture(scope="session")
 async def ac():
