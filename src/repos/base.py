@@ -8,6 +8,8 @@ from src.database import Base
 from src.repos.mappers.base import BaseMapper
 from src.utils.exceptions import NotUniqueException, ObjNotFoundException
 
+import os
+
 
 class BaseRepository:
     model: Base = None
