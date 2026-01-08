@@ -1,0 +1,24 @@
+services:
+  db-test:
+    container_name: linker-db-test
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - linker_db_data_test:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - linker_backend
+    env_file:
+      - .env.test
+
+volumes:
+  linker_db_data_test:
+
+networks:
+  linker_backend:
+    external: true
