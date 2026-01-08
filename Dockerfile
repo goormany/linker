@@ -12,7 +12,7 @@ WORKDIR /app
 COPY --from=builder /app/.venv ./.venv
 ENV PATH="/app/.venv/bin:$PATH"
 
-COPY alembic.ini .python-version ./
+COPY alembic.ini .python-version pytest.ini ./
 COPY src/ ./src/
 COPY tests/ ./tests/
 COPY .env ./
