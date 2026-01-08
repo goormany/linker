@@ -1,6 +1,6 @@
 name: testing and lint code
 on:
-  push:
+  pull_request:
     branches:
       - main
 
