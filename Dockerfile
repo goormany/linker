@@ -15,7 +15,6 @@ ENV PATH="/app/.venv/bin:$PATH"
 COPY alembic.ini .python-version pytest.ini ./
 COPY src/ ./src/
 COPY tests/ ./tests/
-COPY .env ./
 
 RUN find /app/.venv -type d -name "__pycache__" -exec rm -rf {} + \
     && find /app/.venv -type f -name "*.pyc" -delete
