@@ -12,3 +12,5 @@ wheels/
 
 # secrets
 .env.local
+.env.test
+.env
