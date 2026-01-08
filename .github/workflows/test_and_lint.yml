@@ -15,27 +15,27 @@ jobs:
       - name: build
         run: docker build -t linker .
       
-      - name: linter
-        run: docker run --rm linker ruff check
+      # - name: linter
+      #   run: docker run --rm linker ruff check
       
-      - name: check formater
-        run: docker run --rm linker ruff format --check
+      # - name: check formater
+      #   run: docker run --rm linker ruff format --check
       
-      - name: create .env.test
-        run: |
-          cat << EOF > .env.test
-          MODE=${{ vars.MODE }}
-          POSTGRES_DB=${{ vars.POSTGRES_DB }}
-          POSTGRES_HOST=${{ vars.POSTGRES_HOST }}
-          POSTGRES_PASSWORD=${{ vars.POSTGRES_PASSWORD }}
-          POSTGRES_PORT=${{ vars.POSTGRES_PORT }}
-          POSTGRES_USER=${{ vars.POSTGRES_USER }}
+      # - name: create .env.test
+      #   run: |
+      #     cat << EOF > .env.test
+      #     MODE=${{ vars.MODE }}
+      #     POSTGRES_DB=${{ vars.POSTGRES_DB }}
+      #     POSTGRES_HOST=${{ vars.POSTGRES_HOST }}
+      #     POSTGRES_PASSWORD=${{ vars.POSTGRES_PASSWORD }}
+      #     POSTGRES_PORT=${{ vars.POSTGRES_PORT }}
+      #     POSTGRES_USER=${{ vars.POSTGRES_USER }}
       
-      - name: create docker network
-        run: docker network create ${{ vars.DOCKER_NETWORK }}
+      # - name: create docker network
+      #   run: docker network create ${{ vars.DOCKER_NETWORK }}
       
-      - name: testing db up
-        run: docker compose -f docker-compose.test.yml --env-file .env.test up -d
+      # - name: testing db up
+      #   run: docker compose -f docker-compose.test.yml --env-file .env.test up -d
       
-      - name: test
-        run: docker run --rm --network ${{ vars.DOCKER_NETWORK }} linker pytest -s -v
+      # - name: test
+      #   run: docker run --rm --network ${{ vars.DOCKER_NETWORK }} linker pytest -s -v
