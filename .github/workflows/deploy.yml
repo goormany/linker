@@ -1,0 +1,15 @@
+name: deploy
+on:
+  workflow_run:
+    workflows:
+      - testing and lint code
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: deploy
+        run: echo "deploy"
