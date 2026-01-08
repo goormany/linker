@@ -14,7 +14,7 @@ import pytest
 )
 async def test_create_and_get_short_url(ac, url):
     response = await ac.post("/", json={"dest_url": url})
-    assert response.status_code == 200
+    assert response.status_code == 201
 
     data = response.json()
     data = data.get("data", None)
