@@ -16,10 +16,10 @@ jobs:
         run: docker build -t linker .
       
       - name: linter
-        run: docker run --rm linker uv run ruff check
+        run: docker run --rm linker ruff check
       
       - name: check formater
-        run: docker run --rm linker uv run ruff format --check
+        run: docker run --rm linker ruff format --check
       
       - name: create .env.test
         run: |
@@ -38,4 +38,4 @@ jobs:
         run: docker compose -f docker-compose.test.yml --env-file .env.test up -d
       
       - name: test
-        run: docker run --rm --network ${{ vars.DOCKER_NETWORK }} linker uv run pytest -s -v
+        run: docker run --rm --network ${{ vars.DOCKER_NETWORK }} linker pytest -s -v
